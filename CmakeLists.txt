@@ -6,7 +6,10 @@ endif()
 
 set(_atemSDKName "atemSDK")
 
-project("${_atemSDKName}" LANGUAGES CXX C)
+project("${_atemSDKName}"
+  DESCRIPTION "BMD ATEM SDK cmake intergration."
+  LANGUAGES CXX C
+)
 
 
 if(_isSubProject)
