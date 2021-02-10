@@ -1,0 +1,36 @@
+cmake_minimum_required(VERSION 3.19.0)
+
+if(DEFINED PROJECT_NAME)
+  set(_isSubProject TRUE)
+endif()
+
+project(atemsdk LANGUAGES CXX C)
+
+set(_atemSDKName "AtemSDK")
+
+if(_isSubProject)
+  
+  # Add current dir to CMAKE_MODULE_PATH to find FindAtemSDK.cmake
+  list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+  find_package("${_atemSDKName}"
+    REQUIRED
+    MODULE
+  )
+
+else()
+
+  include(GNUInstallDirs)
+
+  set(_destPath "${CMAKE_INSTALL_LIBDIR}/${_atemSDKName}")
+  
+  install(DIRECTORY 
+      "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
+    DESTINATION
+      "${_destPath}"
+    FILES_MATCHING
+    PATTERN *.cmake
+  )
+
+endif()
+
