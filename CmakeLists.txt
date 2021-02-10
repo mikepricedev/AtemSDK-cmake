@@ -4,9 +4,10 @@ if(DEFINED PROJECT_NAME)
   set(_isSubProject TRUE)
 endif()
 
-project(atemsdk LANGUAGES CXX C)
+set(_atemSDKName "atemSDK")
 
-set(_atemSDKName "AtemSDK")
+project("${_atemSDKName}" LANGUAGES CXX C)
+
 
 if(_isSubProject)
   

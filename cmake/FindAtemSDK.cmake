@@ -117,7 +117,7 @@ if(APPLE)
   # Load CoreFoundation Framework
   find_library(CF_FRAMEWORK CoreFoundation REQUIRED)
   
-  target_link_libraries(AtemSDK
+  target_link_libraries("${_findPkgName}"
     PUBLIC
       "${CF_FRAMEWORK}"
   )
