@@ -5,7 +5,7 @@ set(_findVersion "${${CMAKE_FIND_PACKAGE_NAME}_FIND_VERSION}")
 
 set(_versionWarningMsg "Does not support \"VERSION\".  Legacy headers are listed in ${_findPkgName}_LEGACY_H.")
 
-set(_atemSDKNotFoundMSg "${_findPkgName} not found.  ATEM Software Control must be installed on system.")
+set(_atemSDKNotFoundMSg "${_findPkgName} not found.  ATEM Software Control must be installed on system.  Download at https://www.blackmagicdesign.com/support.")
 
 if(WIN32)
   
@@ -31,7 +31,7 @@ foreach(_appsDir IN LISTS
   CMAKE_SYSTEM_PROGRAM_PATH
   CMAKE_SYSTEM_PREFIX_PATH
 )
-
+  
   file(GLOB _foundBMDAtemDirs
     LIST_DIRECTORIES TRUE
     "${_appsDir}/*blackmagic*"
@@ -39,7 +39,7 @@ foreach(_appsDir IN LISTS
     "${_appsDir}/*atem*"
     "${_appsDir}/*Atem*"
   )
-  
+
   if(NOT _foundBMDAtemDirs)
     continue()
   endif()
@@ -55,7 +55,7 @@ endforeach()
 
 # Search for atem SDK header or idl in blackmagic and atem directories
 foreach(_bmdAtemDir IN LISTS _bmdAtemDirs)
-  
+
   file(GLOB_RECURSE _atemSDKIdlOrH
     LIST_DIRECTORIES FALSE
     "${_bmdAtemDir}/*BMDSwitcherAPI.${_atemSDKSearchExt}"
@@ -123,8 +123,6 @@ if(APPLE)
   )
 
   set_target_properties("${_findPkgName}" PROPERTIES
-    CXX_STANDARD_REQUIRED ON
-    CXX_STANDARD 14
     LINKER_LANGUAGE CXX
   )
 
@@ -225,10 +223,6 @@ else()
   )
 
   set_target_properties("${_findPkgName}" PROPERTIES
-    CXX_STANDARD_REQUIRED ON
-    C_STANDARD_REQUIRED ON
-    CXX_STANDARD 14
-    C_STANDARD 11
     LINKER_LANGUAGE CXX
   )
   
